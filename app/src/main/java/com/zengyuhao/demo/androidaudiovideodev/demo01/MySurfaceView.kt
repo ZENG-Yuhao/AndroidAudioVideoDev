@@ -24,9 +24,17 @@ class MySurfaceView @JvmOverloads constructor(
 
     @Volatile
     private var surfaceAvailable = false
-    private val paint = Paint()
-//    private var width = 0
-//    private var height = 0
+    private val paint = Paint().apply {
+                this.color = resources.getColor(android.R.color.holo_blue_dark)
+    }
+    private lateinit var bitmap: Bitmap
+
+    init {
+        viewTreeObserver.addOnGlobalLayoutListener {
+            bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.super_android_man)
+            Bitmap.createScaledBitmap(bitmap, width, height, false)
+        }
+    }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
         Log.d(TAG, "Demo01|$TAG - surfaceCreated()")
@@ -47,10 +55,8 @@ class MySurfaceView @JvmOverloads constructor(
 
     fun drawBitmap() {
         if (!surfaceAvailable) return
-
-        var bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.super_android_man)
-        bitmap = Bitmap.createScaledBitmap(bitmap, width / 2, height / 2, false)
         val canvas = holder.lockCanvas()
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
         canvas.drawBitmap(bitmap, 0f, 0f, paint)
         holder.unlockCanvasAndPost(canvas)
     }
