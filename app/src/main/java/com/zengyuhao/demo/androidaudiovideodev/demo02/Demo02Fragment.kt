@@ -2,12 +2,8 @@ package com.zengyuhao.demo.androidaudiovideodev.demo02
 
 
 import android.content.pm.PackageManager
-import android.media.AudioFormat
-import android.media.AudioRecord
-import android.media.MediaRecorder
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -15,106 +11,60 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.zengyuhao.demo.androidaudiovideodev.R
+import com.zengyuhao.demo.androidaudiovideodev.demo02.api.AudioRecorder
 import kotlinx.android.synthetic.main.fragment_demo02.*
+import java.io.File
 
 class Demo02Fragment : Fragment() {
     companion object {
-        private const val PRINT_RAW_DATA = 1
+        const val MAX_PROGRESS = 90
     }
 
-    private lateinit var audioRecord: AudioRecord
-    private var isRecording = false
-    private var buffSize = 0
-    private val uiHandler = Handler {
-        when (it.what) {
-            PRINT_RAW_DATA -> {
-                val msg = it.obj as Double
-                txtRawData.append(msg.toString() + "\n")
-                true
-            }
-            else -> false
-        }
-    }
+    private lateinit var mRecorder: AudioRecorder
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_demo02, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        btnRecord.setOnClickListener {
-            record()
-            txtRawData.append("Start Recording...\n")
-        }
-        btnRecordStop.setOnClickListener {
-            stopRecording()
-            txtRawData.append("Recording stopped.")
-        }
+
         checkRecordAudioPermission()
-        initAudioRecord()
+        val docDir = context!!.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+        Log.d("Demo02Fragment", "path = ${docDir.path}")
+        val file = File(docDir, "demo02.wav")
+        mRecorder = AudioRecorder(file)
+        mRecorder.setVolumeCallback {
+            Log.d("TAG", "--->volume $it")
+            progressBar.progress = if (it < MAX_PROGRESS) it.toInt() else MAX_PROGRESS
+        }
+
+        btnRecord.setOnClickListener {
+            mRecorder.start()
+        }
+
+        btnRecordStop.setOnClickListener {
+            mRecorder.stop()
+        }
     }
 
-    private fun initAudioRecord() {
-        buffSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
-        Log.d("TAG", "minBufferSize = $buffSize")
-        audioRecord = AudioRecord(
-                MediaRecorder.AudioSource.MIC,
-                44100,
-                AudioFormat.CHANNEL_IN_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                buffSize
-        )
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mRecorder.stop()
     }
 
     private fun checkRecordAudioPermission() {
-        val permissionCheck = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.RECORD_AUDIO)
-        if (PackageManager.PERMISSION_GRANTED != permissionCheck) {
-            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.RECORD_AUDIO), 0)
-        }
-    }
-
-    private fun record() {
-        if (audioRecord.state == AudioRecord.STATE_INITIALIZED && audioRecord.state != AudioRecord.RECORDSTATE_RECORDING) {
-            RecordThread(uiHandler).start()
-        }
-    }
-
-    private fun stopRecording() {
-        isRecording = false
-    }
-
-    inner class RecordThread(private val uiHandler: Handler) : Thread() {
-        override fun run() {
-            Log.d("TAG", "Start recording...")
-            audioRecord.startRecording()
-            var buff = ByteArray(buffSize)
-            isRecording = true
-            while (isRecording) {
-                Log.d("TAG", "Recording loop...")
-                val read = audioRecord.read(buff, 0, buff.size)
-                if (read == AudioRecord.ERROR_INVALID_OPERATION) {
-                    Log.d("TAG", "Error Invalid Operation.")
-                    Toast.makeText(activity!!, "Error Invalid Operation", Toast.LENGTH_LONG).show()
-                    return
-                }
-                if (read > 0) {
-                    var sum = 0.0
-                    for (i in 0..(read - 1)) {
-                        sum += buff[i] * buff[i]
-                    }
-                    val amplitude = sum / read
-                    Log.d("TAG", "voice read = $amplitude")
-                    Message().apply {
-                        what = PRINT_RAW_DATA
-                        obj = amplitude
-                        uiHandler.sendMessage(this)
-                    }
-                }
-            }
-            Log.d("TAG", "Stop recording.")
-            audioRecord.stop()
+        val recordPermission = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.RECORD_AUDIO)
+        val storagePermission = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (PackageManager.PERMISSION_GRANTED != recordPermission ||
+                PackageManager.PERMISSION_GRANTED != storagePermission) {
+            ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    0
+            )
         }
     }
 }

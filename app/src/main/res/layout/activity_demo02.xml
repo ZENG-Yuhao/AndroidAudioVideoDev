@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_demo02"
-        class="com.zengyuhao.demo.androidaudiovideodev.demo02.Demo02_1Fragment"
+        class="com.zengyuhao.demo.androidaudiovideodev.demo02.Demo02Fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>
