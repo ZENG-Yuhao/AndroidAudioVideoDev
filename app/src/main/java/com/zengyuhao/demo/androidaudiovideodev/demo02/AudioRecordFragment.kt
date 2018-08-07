@@ -13,10 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.zengyuhao.demo.androidaudiovideodev.R
 import com.zengyuhao.demo.androidaudiovideodev.demo02.api.AudioRecorder
-import kotlinx.android.synthetic.main.fragment_demo02.*
+import kotlinx.android.synthetic.main.audio_record_fragment.*
 import java.io.File
 
-class Demo02Fragment : Fragment() {
+class AudioRecordFragment : Fragment() {
     companion object {
         const val MAX_PROGRESS = 90
     }
@@ -26,14 +26,14 @@ class Demo02Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_demo02, container, false)
+        return inflater.inflate(R.layout.audio_record_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         checkRecordAudioPermission()
         val docDir = context!!.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-        Log.d("Demo02Fragment", "path = ${docDir.path}")
+        Log.d("AudioRecordFragment", "path = ${docDir.path}")
         val file = File(docDir, "demo02.wav")
         mRecorder = AudioRecorder(file)
         mRecorder.setVolumeCallback {

@@ -8,7 +8,7 @@ class Demo02Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_demo02)
+        setContentView(R.layout.demo02_activity)
     }
 
 }

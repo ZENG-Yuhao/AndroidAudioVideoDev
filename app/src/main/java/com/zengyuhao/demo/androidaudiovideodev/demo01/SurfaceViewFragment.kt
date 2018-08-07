@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo03
+package com.zengyuhao.demo.androidaudiovideodev.demo01
 
 
 import android.os.Bundle
@@ -8,18 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zengyuhao.demo.androidaudiovideodev.R
+import kotlinx.android.synthetic.main.demo01_fragment.*
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class Demo03Fragment : Fragment() {
+class SurfaceViewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_demo03, container, false)
+        return inflater.inflate(R.layout.demo01_fragment, container, false)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        txtVersion.text = "Kotlin"
+    }
 }

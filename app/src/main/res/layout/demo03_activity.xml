@@ -5,4 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".demo03.Demo03Activity">
 
+    <fragment
+        android:id="@+id/fragment_demo02"
+        class="com.zengyuhao.demo.androidaudiovideodev.demo03.MediaRecorderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

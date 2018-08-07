@@ -3,12 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".demo01.Demo01Fragment">
+    tools:context=".demo01.SurfaceViewFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="Kotlin" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -65,8 +65,7 @@ public class AudioRecorder {
                     SAMPLE_RATE_IN_HZ,
                     AudioFormat.CHANNEL_IN_MONO,
                     AudioFormat.ENCODING_PCM_16BIT,
-                    byteBuffSize
-            );
+                    byteBuffSize);
         }
         return audioRecord;
     }

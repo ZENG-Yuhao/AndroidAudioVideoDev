@@ -8,6 +8,6 @@ class Demo03Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_demo03)
+        setContentView(R.layout.demo03_activity)
     }
 }
