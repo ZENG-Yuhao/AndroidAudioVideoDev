@@ -6,8 +6,10 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.ImageFormat
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
+import android.media.ImageReader
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
@@ -27,6 +29,7 @@ import com.zengyuhao.demo.androidaudiovideodev.R
 import com.zengyuhao.demo.androidaudiovideodev.common.ErrorDialog
 import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.Camera2Util
 import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.CameraInfoExporter
+import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.ImageFormatString
 import java.util.*
 
 class MediaRecorderFragment : Fragment() {
@@ -70,6 +73,7 @@ class MediaRecorderFragment : Fragment() {
     private var backgroundThread: HandlerThread? = null
     private var cameraDevice: CameraDevice? = null
     private var captureSession: CameraCaptureSession? = null
+    private var imageReader: ImageReader? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -230,12 +234,15 @@ class MediaRecorderFragment : Fragment() {
     }
 
     private fun closePreviewSession() {
+        captureSession?.stopRepeating()
+        captureSession?.abortCaptures()
         captureSession?.close()
         captureSession = null
     }
 
     private fun prepareMediaRecorder() {
         mediaRecorder = MediaRecorder()
+
         val rotation = activity!!.windowManager.defaultDisplay.rotation
         when (cameraSensorOrientation) {
             SENSOR_ORIENTATION_DEFAULT_DEGREES ->
@@ -270,7 +277,17 @@ class MediaRecorderFragment : Fragment() {
         previewRequestBuilder.addTarget(previewSurface)
         previewRequestBuilder.addTarget(recordSurface)
 
-        cameraDevice!!.createCaptureSession(Arrays.asList(previewSurface, recordSurface),
+        imageReader = ImageReader.newInstance(previewSize.width, previewSize.height, ImageFormat.YUV_420_888, 2)
+        imageReader!!.setOnImageAvailableListener({ reader ->
+            val image = reader!!.acquireNextImage()
+            Log.d(TAG, "image received : format=${ImageFormatString.from(image.format)} planes.size=${image.planes.size} w=${image.width} h=${image.height} timestamp=${image.timestamp}")
+            image.close()
+        }, backgroundHandler)
+        val imageReaderSurface = imageReader!!.surface
+        previewRequestBuilder.addTarget(imageReaderSurface)
+
+
+        cameraDevice!!.createCaptureSession(Arrays.asList(previewSurface, recordSurface, imageReaderSurface),
                 object : CameraCaptureSession.StateCallback() {
                     override fun onConfigureFailed(session: CameraCaptureSession?) {
                         ErrorDialog.newInstance("Configure recording session failed.")
@@ -287,15 +304,21 @@ class MediaRecorderFragment : Fragment() {
     }
 
     private fun stopRecording() {
+        imageReader?.close()
+        imageReader = null
+
+
         mediaRecorder?.stop()
+        mediaRecorder?.reset()
+        startPreview()
     }
 
     private fun closeCamera() {
         closePreviewSession()
-        cameraDevice?.close()
-        cameraDevice = null
         mediaRecorder?.release()
         mediaRecorder = null
+        cameraDevice?.close()
+        cameraDevice = null
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
