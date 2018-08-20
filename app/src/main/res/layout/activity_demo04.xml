@@ -4,7 +4,7 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.demo01.Demo01Activity">
+    tools:context=".ui.demo04.Demo04Activity">
 
     <fragment
         android:id="@+id/fragment_demo01"

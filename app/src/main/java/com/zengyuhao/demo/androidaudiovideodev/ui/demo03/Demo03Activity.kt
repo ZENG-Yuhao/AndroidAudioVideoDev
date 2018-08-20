@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo03
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo03
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

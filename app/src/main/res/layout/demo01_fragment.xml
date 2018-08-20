@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".demo01.SurfaceViewFragment">
+    tools:context=".ui.demo01.SurfaceViewFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <com.zengyuhao.demo.androidaudiovideodev.demo01.MySurfaceView
+        <com.zengyuhao.demo.androidaudiovideodev.ui.demo01.MySurfaceView
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal" />
@@ -45,7 +45,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <com.zengyuhao.demo.androidaudiovideodev.demo01.MyCustomView
+        <com.zengyuhao.demo.androidaudiovideodev.ui.demo01.MyCustomView
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal" />

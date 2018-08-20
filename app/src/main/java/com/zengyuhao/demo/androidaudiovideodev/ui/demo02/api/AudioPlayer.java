@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo02.api;
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo02.api;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

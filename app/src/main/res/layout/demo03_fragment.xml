@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".demo03.Demo03Fragment">
+    tools:context=".ui.demo03.Demo03Fragment">
 
     <TextureView
         android:id="@+id/textureView"

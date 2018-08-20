@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo03.camera2
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2
 
 import android.content.Context
 import android.os.Environment

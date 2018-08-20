@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo02
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo02
 
 
 import android.content.pm.PackageManager
@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zengyuhao.demo.androidaudiovideodev.R
-import com.zengyuhao.demo.androidaudiovideodev.demo02.api.AudioRecorder
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo02.api.AudioRecorder
 import kotlinx.android.synthetic.main.audio_record_fragment.*
 import java.io.File
 

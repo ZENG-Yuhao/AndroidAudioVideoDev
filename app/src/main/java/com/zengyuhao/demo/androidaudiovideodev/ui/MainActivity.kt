@@ -1,12 +1,13 @@
-package com.zengyuhao.demo.androidaudiovideodev
+package com.zengyuhao.demo.androidaudiovideodev.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.zengyuhao.demo.androidaudiovideodev.demo01.Demo01Activity
-import com.zengyuhao.demo.androidaudiovideodev.demo02.Demo02Activity
-import com.zengyuhao.demo.androidaudiovideodev.demo03.Demo03Activity
+import com.zengyuhao.demo.androidaudiovideodev.R
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo01.Demo01Activity
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo02.Demo02Activity
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.Demo03Activity
 
 class MainActivity : AppCompatActivity() {
 

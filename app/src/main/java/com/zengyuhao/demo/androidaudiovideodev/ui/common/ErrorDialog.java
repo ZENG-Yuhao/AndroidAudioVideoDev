@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.common;
+package com.zengyuhao.demo.androidaudiovideodev.ui.common;
 
 import android.app.Activity;
 import android.app.AlertDialog;

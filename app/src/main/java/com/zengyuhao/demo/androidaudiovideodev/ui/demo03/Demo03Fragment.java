@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo03;
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo03;
 
 
 import android.Manifest;
@@ -36,10 +36,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.zengyuhao.demo.androidaudiovideodev.R;
-import com.zengyuhao.demo.androidaudiovideodev.common.ErrorDialog;
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.Camera2Util;
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.CameraInfoExporter;
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.SimpleSurfaceTextureListener;
+import com.zengyuhao.demo.androidaudiovideodev.ui.common.ErrorDialog;
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.Camera2Util;
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.CameraInfoExporter;
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.SimpleSurfaceTextureListener;
 
 import java.io.File;
 import java.io.IOException;

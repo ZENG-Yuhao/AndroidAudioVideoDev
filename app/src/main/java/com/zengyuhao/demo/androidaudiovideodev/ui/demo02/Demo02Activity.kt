@@ -1,13 +1,14 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo01
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo02
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.zengyuhao.demo.androidaudiovideodev.R
 
-class Demo01Activity : AppCompatActivity() {
+class Demo02Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.demo01_activity)
-    }}
+        setContentView(R.layout.demo02_activity)
+    }
 
+}

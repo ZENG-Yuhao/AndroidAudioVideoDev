@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo03
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo03
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -26,10 +26,10 @@ import android.widget.Toast
 import com.example.android.camera2video.AutoFitTextureView
 
 import com.zengyuhao.demo.androidaudiovideodev.R
-import com.zengyuhao.demo.androidaudiovideodev.common.ErrorDialog
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.Camera2Util
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.CameraInfoExporter
-import com.zengyuhao.demo.androidaudiovideodev.demo03.camera2.ImageFormatString
+import com.zengyuhao.demo.androidaudiovideodev.ui.common.ErrorDialog
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.Camera2Util
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.CameraInfoExporter
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.camera2.ImageFormatString
 import java.util.*
 
 class MediaRecorderFragment : Fragment() {
@@ -184,7 +184,7 @@ class MediaRecorderFragment : Fragment() {
 
     private fun findAvailableCamera(cameraManager: CameraManager): String {
         for (id in cameraManager.cameraIdList) {
-            val characteristics = cameraManager.getCameraCharacteristics(id);
+            val characteristics = cameraManager.getCameraCharacteristics(id)
             val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
             if (null != facing && CameraCharacteristics.LENS_FACING_FRONT == facing) {
                 continue
@@ -209,7 +209,7 @@ class MediaRecorderFragment : Fragment() {
             return
         }
         val surfaceTexture = textureVw.surfaceTexture
-        surfaceTexture.setDefaultBufferSize(previewSize?.width, previewSize.height)
+        surfaceTexture.setDefaultBufferSize(previewSize.width, previewSize.height)
         val previewSurface = Surface(surfaceTexture)
         previewRequestBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
         previewRequestBuilder.addTarget(previewSurface)

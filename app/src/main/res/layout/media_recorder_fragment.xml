@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".demo03.MediaRecorderFragment">
+    tools:context=".ui.demo03.MediaRecorderFragment">
 
     <com.example.android.camera2video.AutoFitTextureView
         android:id="@+id/MediaRecordFragment_textureVw"

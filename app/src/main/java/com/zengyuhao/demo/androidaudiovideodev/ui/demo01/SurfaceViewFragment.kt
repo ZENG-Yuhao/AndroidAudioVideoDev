@@ -1,4 +1,4 @@
-package com.zengyuhao.demo.androidaudiovideodev.demo01
+package com.zengyuhao.demo.androidaudiovideodev.ui.demo01
 
 
 import android.os.Bundle
