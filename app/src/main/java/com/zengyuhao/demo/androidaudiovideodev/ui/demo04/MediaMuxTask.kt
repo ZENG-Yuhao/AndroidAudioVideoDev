@@ -6,7 +6,6 @@ import android.media.MediaFormat
 import android.media.MediaMuxer
 import android.util.Log
 import java.io.File
-import java.io.FileInputStream
 import java.nio.ByteBuffer
 
 class MediaMuxTask(
@@ -62,11 +61,9 @@ class MediaMuxTask(
 
             val maxInputSize = videoExtractor.getTrackFormat(videoTrackIndex).getInteger(MediaFormat.KEY_MAX_INPUT_SIZE)
             val byteBuffer = ByteBuffer.allocate(maxInputSize)
-            val sampleTime = getVideoSampleTime(videoExtractor, videoTrackIndex, byteBuffer)
+            val sampleTime = 1_000_000 / videoExtractor.getTrackFormat(videoTrackIndex).getInteger(MediaFormat.KEY_FRAME_RATE)
 
             // mux video track
-            videoExtractor = MediaExtractor()
-            videoExtractor.setDataSource(videoFileIn.absolutePath)
             Log.d(TAG, "---> mux video track")
             videoExtractor.selectTrack(videoTrackIndex)
             val videoBufferInfo = MediaCodec.BufferInfo()
@@ -103,20 +100,5 @@ class MediaMuxTask(
             mediaMuxer?.stop()
             mediaMuxer?.release()
         }
-    }
-
-    private fun getVideoSampleTime(mediaExtractor: MediaExtractor, trackIndex: Int, buffer: ByteBuffer): Long {
-        mediaExtractor.selectTrack(trackIndex)
-        mediaExtractor.readSampleData(buffer, 0)
-        if (MediaExtractor.SAMPLE_FLAG_SYNC == mediaExtractor.sampleFlags) {
-            mediaExtractor.advance()
-        }
-        mediaExtractor.readSampleData(buffer, 0)
-        val firstVideoPts = mediaExtractor.sampleTime
-        mediaExtractor.advance()
-        mediaExtractor.readSampleData(buffer, 0)
-        val secondVideoPts = mediaExtractor.sampleTime
-        mediaExtractor.unselectTrack(trackIndex)
-        return Math.abs(secondVideoPts - firstVideoPts)
     }
 }
