@@ -28,5 +28,11 @@
             style="@style/MainActivityButton"
             android:onClick="onBtnClick"
             android:text="Camera2" />
+
+        <Button
+            android:id="@+id/btn_demo04"
+            style="@style/MainActivityButton"
+            android:onClick="onBtnClick"
+            android:text="Demo 04" />
     </LinearLayout>
 </ScrollView>

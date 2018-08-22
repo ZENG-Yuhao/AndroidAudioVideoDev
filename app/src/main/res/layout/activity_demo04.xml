@@ -7,8 +7,8 @@
     tools:context=".ui.demo04.Demo04Activity">
 
     <fragment
-        android:id="@+id/fragment_demo01"
-        class="com.zengyuhao.demo.androidaudiovideodev.ui.demo01.SurfaceViewFragment"
+        android:id="@+id/fragment_demo04"
+        class="com.zengyuhao.demo.androidaudiovideodev.ui.demo04.MediaMuxerMediaExtractorFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
