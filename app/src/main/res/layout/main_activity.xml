@@ -33,6 +33,12 @@
             android:id="@+id/btn_demo04"
             style="@style/MainActivityButton"
             android:onClick="onBtnClick"
-            android:text="Demo 04" />
+            android:text="MediaExtractor - MediaMuxer" />
+
+        <Button
+            android:id="@+id/btn_demo05"
+            style="@style/MainActivityButton"
+            android:onClick="onBtnClick"
+            android:text="OpenGL ES" />
     </LinearLayout>
 </ScrollView>

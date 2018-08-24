@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Open GL ES -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:name=".appcore.CustomApplication"
@@ -26,9 +30,9 @@
         <activity android:name=".ui.demo01.Demo01Activity" />
         <activity android:name=".ui.demo02.Demo02Activity" />
         <activity android:name=".ui.demo03.Demo03Activity" />
-        <activity android:name=".temp.JavaActivity" />
-        <activity android:name=".temp.KotlinActivity" />
-        <activity android:name=".ui.demo04.Demo04Activity"></activity>
+        <activity android:name=".ui.demo04.Demo04Activity" />
+        <activity android:name=".ui.demo05.Demo05Activity" />
+        <activity android:name=".ui.demo05.OpenGLESActivity"></activity>
     </application>
 
 </manifest>

@@ -70,10 +70,12 @@ class MediaMuxTask(
             while (true) {
                 val read = videoExtractor.readSampleData(byteBuffer, 0)
                 if (read < 0) break
-                videoBufferInfo.size = read
-                videoBufferInfo.presentationTimeUs += sampleTime
-                videoBufferInfo.offset = 0
-                videoBufferInfo.flags = videoExtractor.sampleFlags
+                videoBufferInfo.apply {
+                    size = read
+                    presentationTimeUs += sampleTime
+                    offset = 0
+                    flags = videoExtractor.sampleFlags
+                }
                 mediaMuxer.writeSampleData(muxerVideoTrackIndex, byteBuffer, videoBufferInfo)
                 videoExtractor.advance()
             }

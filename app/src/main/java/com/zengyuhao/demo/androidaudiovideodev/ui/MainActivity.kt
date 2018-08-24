@@ -9,6 +9,7 @@ import com.zengyuhao.demo.androidaudiovideodev.ui.demo01.Demo01Activity
 import com.zengyuhao.demo.androidaudiovideodev.ui.demo02.Demo02Activity
 import com.zengyuhao.demo.androidaudiovideodev.ui.demo03.Demo03Activity
 import com.zengyuhao.demo.androidaudiovideodev.ui.demo04.Demo04Activity
+import com.zengyuhao.demo.androidaudiovideodev.ui.demo05.OpenGLESActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.btn_demo04 -> {
                 startActivity(Intent(this, Demo04Activity::class.java))
+            }
+            R.id.btn_demo05 -> {
+                startActivity(Intent(this, OpenGLESActivity::class.java))
             }
         }
     }
